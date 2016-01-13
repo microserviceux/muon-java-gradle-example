@@ -1,3 +1,5 @@
+package io.muoncore.example;
+
 import io.muoncore.Discovery;
 import io.muoncore.Muon;
 import io.muoncore.SingleTransportMuon;
@@ -27,11 +29,12 @@ public class MuonClientExample {
     public static void main(String[] args) throws Exception {
 
         Properties props = new Properties();
-        props.load(MuonClientExample.class.getResourceAsStream("application.properties"));
+        props.load(MuonClientExample.class.getResourceAsStream("/application.properties"));
 
         Muon muon = createMuon(props);
         muon.getDiscovery().blockUntilReady();
 
+        //a bug in the discovery means the above block doesn't work. Fixed in next snapshot
         Thread.sleep(4000);
 
         Response<String> data = muon.request("request://ExampleService/hello", String.class).get();
@@ -41,6 +44,7 @@ public class MuonClientExample {
         muon.shutdown();
     }
 
+    //the below will be folded into a property based builder in a future version
     private static Muon createMuon(Properties props) throws URISyntaxException, KeyManagementException, NoSuchAlgorithmException, IOException {
 
         String serviceName = props.getProperty("service.name") + "-client";

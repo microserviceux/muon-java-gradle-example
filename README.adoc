@@ -1,0 +1,38 @@
+# Gradle example for Muon Java
+
+This example project shows how to make a couple of simple Muon services
+and have them communicate.
+
+First, check the project compiles, downloading gradle automatically via the gradle wrapper
+embedded in the project.
+
+```
+./gradlew assemble
+```
+
+## Before You Start
+
+This project is configured to use the AMQP discovery and transport for Muon.
+
+You will need an AMQP broker available that you can connnect to.
+
+You can set the AMQP url to connect in the https://github.com/microserviceux/muon-java-gradle-example/blob/master/src/main/resources/application.properties[application.properties] file
+
+## Run the server
+
+The first service has an RPC endpoint and a reactive stream endpoint.
+
+Run it in one console with :-
+
+```
+./gradlew runServer
+```
+
+
+## Run the client
+
+In a _different_ console, run the client and see an RPC exchange between the services.
+
+```
+./gradlew runClient
+```

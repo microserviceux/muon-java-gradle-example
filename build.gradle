@@ -17,6 +17,16 @@ dependencies {
 
 }
 
+task(runServer, dependsOn: 'classes', type: JavaExec) {
+    main = 'io.muoncore.example.MuonServerExample'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task(runClient, dependsOn: 'classes', type: JavaExec) {
+    main = 'io.muoncore.example.MuonClientExample'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.10'
 }

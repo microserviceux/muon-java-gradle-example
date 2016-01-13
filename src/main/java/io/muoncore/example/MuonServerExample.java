@@ -1,3 +1,5 @@
+package io.muoncore.example;
+
 import io.muoncore.Discovery;
 import io.muoncore.Muon;
 import io.muoncore.SingleTransportMuon;
@@ -31,7 +33,7 @@ public class MuonServerExample {
     public static void main(String[] args) throws Exception {
 
         Properties props = new Properties();
-        props.load(MuonServerExample.class.getResourceAsStream("application.properties"));
+        props.load(MuonServerExample.class.getResourceAsStream("/application.properties"));
 
         muonServer(props);
 
