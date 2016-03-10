@@ -1,8 +1,26 @@
+buildscript {
+    ext {
+        springBootVersion = '1.2.2.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
 apply plugin: 'java'
+apply plugin: 'spring-boot'
 
 sourceCompatibility = 1.8
 version = '1.0'
 
+springBoot {
+    mainClass = 'io.muoncore.example.MuonServerExample'
+}
+
+//mainClassName = 'io.muoncore.example.MuonServerExample'
 
 repositories {
     jcenter()
