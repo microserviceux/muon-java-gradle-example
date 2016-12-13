@@ -6,6 +6,9 @@ import io.muoncore.config.AutoConfiguration;
 import io.muoncore.config.MuonConfigBuilder;
 import io.muoncore.protocol.requestresponse.Response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * Simple Muon example that acts as a client
@@ -19,9 +22,13 @@ public class MuonClientExample {
         Muon muon = MuonBuilder.withConfig(config).build();
         muon.getDiscovery().blockUntilReady();
 
-        Response<String> data = muon.request("request://example-service/hello", String.class).get();
+        Map setting = new HashMap<>();
+        setting.put("key", "hello");
+        setting.put("value", 1234);
 
-        System.out.println("Example Service says: " + data.getPayload());
+        Response data = muon.request("request://example-service/set", setting).get();
+
+        System.out.println("Example Service says: " + data.getPayload(String.class));
 
         muon.shutdown();
     }

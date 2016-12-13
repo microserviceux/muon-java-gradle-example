@@ -32,36 +32,12 @@ public class MuonServerExample {
 
         Muon muon = MuonBuilder.withConfig(config).build();
 
-        muon.handleRequest(all(), Map.class, request -> {
+        muon.handleRequest(all(), request -> {
             System.out.println("A request has been made ");
             Map data = new HashMap();
             data.put("Hello", "world " + System.currentTimeMillis());
             request.ok(data);
         });
-
-//        Broadcaster<String> stream = Broadcaster.create();
-//        muon.publishSource("mySource", HOT, stream);
-//
-//        publishDataEvery5Seconds(stream);
-
         return muon;
-    }
-
-    private static void publishDataEvery5Seconds(Broadcaster<String> broadcaster) {
-
-        new Thread(() -> {
-
-            while(true) {
-                try {
-                    Thread.sleep(5000);
-
-                    broadcaster.accept("Hello World");
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }).start();
     }
 }
